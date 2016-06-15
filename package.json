@@ -1,0 +1,19 @@
+{
+  "name": "local-photo-station",
+  "version": "1.0.0",
+  "description": "Photo import from USB or SD Card and automated tagging for archive purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yves Meili",
+  "license": "ISC",
+  "dependencies": {
+    "js-md5": "^0.4.1",
+    "linux-blockutils": "git+https://github.com/meilione/node-linux-blockutils.git#commit-ish",
+    "moment": "^2.13.0",
+    "progress": "^1.1.8",
+    "shelljs": "^0.7.0",
+    "sqlite3": "^3.1.4"
+  }
+}
