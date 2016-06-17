@@ -12,6 +12,8 @@
     "js-md5": "^0.4.1",
     "linux-blockutils": "git+https://github.com/meilione/node-linux-blockutils.git#commit-ish",
     "moment": "^2.13.0",
+    "node-usb-detection": "^1.0.2",
+    "organize.js": "git+https://github.com/meilione/organize.js.git",
     "photo-organize": "git+https://github.com/meilione/photo-organize.git",
     "progress": "^1.1.8",
     "shelljs": "^0.7.0",

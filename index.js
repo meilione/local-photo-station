@@ -1,20 +1,8 @@
 
-var FileImporter = require('./lib/import');
+var FileImporter = require('./lib/import').ImportFiles;
 var Tagger = require('./lib/keyword-generator');
+var EventEmitter = require('events').EventEmitter;
 
-var settings = {
-	filePath : {
-		media : {
-			src  : '',
-			dest : '/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.imported-waiting/'
-		},
-		logs : {
-			fileList : '/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.imported-waiting/',
-			errors   : '/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.imported-waiting/importerrors.log'
-		}
-	},
-	importFilter : {
-		ignoreDevices : ['sda','loop0'],
-		minPathLength : 5
-	}
-}
+var test = new FileImporter();
+
+console.log(test);
