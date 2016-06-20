@@ -60,7 +60,7 @@ function run() {
 function watch() {
 	//console.log("Usb Devices:\n", usbmonitor.list());
 	getDevices(function (devices) {
-		console.log( devices );
+		//console.log( devices );
 		var usbPlugChanged = md5(devices.toString()) != baseLineUSBDevicesPlugged;
 		if (usbPlugChanged && !importIsRunning) {
 			importIsRunning = true;

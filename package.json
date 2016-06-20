@@ -9,8 +9,10 @@
   "author": "Yves Meili",
   "license": "ISC",
   "dependencies": {
+    "config": "^1.21.0",
     "js-md5": "^0.4.1",
     "linux-blockutils": "git+https://github.com/meilione/node-linux-blockutils.git#commit-ish",
+    "minimist": "^1.2.0",
     "moment": "^2.13.0",
     "node-usb-detection": "^1.0.2",
     "organize.js": "git+https://github.com/meilione/organize.js.git",
