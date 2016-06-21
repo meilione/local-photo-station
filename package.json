@@ -19,6 +19,7 @@
     "photo-organize": "git+https://github.com/meilione/photo-organize.git",
     "progress": "^1.1.8",
     "shelljs": "^0.7.0",
-    "sqlite3": "^3.1.4"
+    "sqlite3": "^3.1.4",
+    "yesno": "0.0.1"
   }
 }

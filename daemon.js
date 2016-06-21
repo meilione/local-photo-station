@@ -1,8 +1,22 @@
 /*
-* Photostation daemon
+* Name:   Photostation daemon
+* Date:   2016-06-01
+* Author: Yves Meili <meili@kitakit.ch>
+*
+* The daemon will discover any newly plugged USB thumb drive and auto-
+* matically process with the import, tagging and organizing of the files.
+*
+* In order to run this script as a daemon use the following command:
+*
+*  pm2 start daemon.js
+*
+* This will start a daemon process that the can be monitored by the 
+* pm2 tool with the following command:
+*
+*  pm2 info <id>
+*
+* See documentation at: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-centos-7
 */
-
-//https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-centos-7
 
 var FileImporter = require('./lib/import').ImportFiles;
 var Tagger       = require('./lib/keyword-generator').keywordgenerator;
@@ -11,6 +25,7 @@ var blockutils   = require('linux-blockutils');
 var fs           = require('fs');
 var moment       = require('moment');
 var md5          = require('js-md5');
+var config       = require('config');
 
 
 //Watch USB Port
@@ -20,26 +35,7 @@ var importIsRunning = false;
 var baseLineUSBDevicesPlugged;
 var knownUSBDevices = [];
 var runningIntervalId;
-
-var baseDirectoryDest = '/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/';
-
-var settings = {
-	filePath : {
-		media : {
-			src  : '',
-			dest : baseDirectoryDest + '.imported-waiting/',
-			final : baseDirectoryDest + 'imported/'
-		},
-		logs : {
-			fileList : baseDirectoryDest + '.imported-waiting/',
-			errors   : baseDirectoryDest + '.imported-waiting/importerrors.log'
-		}
-	},
-	importFilter : {
-		ignoreDevices : ['sda','loop0'],
-		minPathLength : 5
-	}
-}
+var dbConfig = config.get('global.dbConfig');
 
 /*
 * Start Process
@@ -54,7 +50,12 @@ getDevices(function (devices) {
 
 //start watcher
 function run() {
-	runningIntervalId = setInterval(watch, 10000);
+	var watchInterval = 10000;
+	if (config.has('daemon.watchInterval')) {
+		watchInterval = config.get('daemon.watchInterval');
+	}
+	console.log("Watch interval at: " + (watchInterval/1000) + "s");
+	runningIntervalId = setInterval(watch, watchInterval);
 }
 
 function watch() {
@@ -63,6 +64,8 @@ function watch() {
 		//console.log( devices );
 		var usbPlugChanged = md5(devices.toString()) != baseLineUSBDevicesPlugged;
 		if (usbPlugChanged && !importIsRunning) {
+			baseLineUSBDevicesPlugged = md5(devices.toString());
+
 			importIsRunning = true;
 			console.log('USB Changed');
 
@@ -73,12 +76,20 @@ function watch() {
 			console.log( knownUSBDevices );
 
 			//Run import
-
 			//TODO how to prevent duplicate import? lock usb mount name for 1h?
+			//TODO maybe start this as a separate process
+			var settings = config.get('global.filesystem');
+			var Importer = new FileImporter(settings, dbConfig, importFinished);
 
+			if (config.has('debug.importFileLimit')) {
+				var limitFilesTo = config.get('debug.importFileLimit');
+				if (limitFilesTo > 0) {
+					console.log('limiting to: ' + limitFilesTo);
+					Importer.limitFileImportTo = limitFilesTo;
+				}
+			}
+			Importer.start();
 
-			var Importer = new FileImporter(settings, importFinished);
-			Importer.start(devices);
 		}
 	});
 
@@ -86,12 +97,10 @@ function watch() {
 
 
 function importFinished() {
-	importIsRunning = false;
-
 	console.log('Running the Tagger now');
-	//TODO maybe start this as a separate process
 	//Start Tagging
-	var tagger = new Tagger(taggingFinished);
+	var settings = Object.assign( config.get('global.filesystem'), config.get('module.tagger') );
+	var tagger = new Tagger(settings, dbConfig, taggingFinished);
 	tagger.start();
 
 }
@@ -100,8 +109,16 @@ function importFinished() {
 function taggingFinished() {
 	//move files to date folders
 	console.log('Moving the files to folders');
-	var organizer = new Organizer(settings);
+	var settings = Object.assign( config.get('global.filesystem'), config.get('module.organizer') );
+	var organizer = new Organizer(settings, organizerFinished);
 	organizer.start();
+
+	importIsRunning = false;
+}
+
+
+function organizerFinished() {
+	
 }
 
 

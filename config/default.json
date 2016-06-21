@@ -12,8 +12,8 @@
 					"final" : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/imported/"
 				},
 				"logs" : {
-					"fileList" : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.imported-waiting/",
-					"errors"   : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.imported-waiting/importerrors.log"
+					"fileList" : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.import-logs/",
+					"errors"   : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.import-logs/importerrors.log"
 				}
 			}
 		}
@@ -33,6 +33,9 @@
 		}
 	},
 	"daemon": {
-
+		"watchInterval" : 2000
+	},
+	"debug": {
+		"importFileLimit": 5
 	}
 }
