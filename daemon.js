@@ -29,7 +29,6 @@ var config       = require('config');
 
 
 //Watch USB Port
-
 var logFilePath = '/home/yvesmeili/Sites/zivi/local-photo-station/daemon.log';
 var importIsRunning = false;
 var baseLineUSBDevicesPlugged;
@@ -37,12 +36,13 @@ var knownUSBDevices = [];
 var runningIntervalId;
 var dbConfig = config.get('global.dbConfig');
 
+
 /*
 * Start Process
 */
 //get baseline
 getDevices(function (devices) {
-	console.log( "Initial devices: ", devices );
+	console.log( "Initial devices: " + devices.toString() );
 	baseLineUSBDevicesPlugged = md5(devices.toString());
 	console.log('baseline: ' + baseLineUSBDevicesPlugged);
 	run();
@@ -118,7 +118,7 @@ function taggingFinished() {
 
 
 function organizerFinished() {
-	
+	console.log('Organizer finished');
 }
 
 

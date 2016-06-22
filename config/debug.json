@@ -36,6 +36,6 @@
 
 	},
 	"debug": {
-		"importFileLimit": 5
+		"importFileLimit": 100
 	}
 }

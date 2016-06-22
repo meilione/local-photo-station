@@ -34,8 +34,5 @@
 	},
 	"daemon": {
 		"watchInterval" : 2000
-	},
-	"debug": {
-		"importFileLimit": 50
 	}
 }

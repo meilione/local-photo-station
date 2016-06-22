@@ -1,4 +1,10 @@
 
+/*
+*
+* export NODE_ENV=production
+*
+*/
+
 var FileImporter = require('./lib/import').ImportFiles;
 var Tagger       = require('./lib/keyword-generator').keywordgenerator;
 var Organizer    = require('./lib/file-organizer').fileorganizer;
@@ -69,11 +75,13 @@ if (runOrganizer && !runImporter && !runTagger) {
 
 
 function importStart() {
+	console.log("Index.js: Import Started");
 	var settings = config.get('global.filesystem');
 	var Importer = new FileImporter(settings, dbConfig, importFinished);
-	if (args.limit) {
+	if (args.limit || config.has('debug.importFileLimit')) {
 		var limitFilesTo = args.limit || config.get('debug.importFileLimit');
 		if (limitFilesTo > 0) {
+			console.log("Limiting to " + limitFilesTo + " files");
 			Importer.limitFileImportTo = limitFilesTo;
 		}
 	}
@@ -88,6 +96,7 @@ function importFinished() {
 }
 
 function taggerStart() {
+	console.log("Index.js: Tagger Started");
 	var settings = Object.assign( config.get('global.filesystem'), config.get('module.tagger') );
 	var tagger = new Tagger(settings, dbConfig, taggerFinished);
 	tagger.start();
@@ -101,6 +110,7 @@ function taggerFinished() {
 }
 
 function organizerStart() {
+	console.log("Index.js: Organizer Started");
 	var settings = Object.assign( config.get('global.filesystem'), config.get('module.organizer') );
 	var organizer = new Organizer(settings, organizerFinished);
 	organizer.start();

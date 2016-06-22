@@ -9,6 +9,7 @@
   "author": "Yves Meili",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.0.0-rc.6",
     "config": "^1.21.0",
     "js-md5": "^0.4.1",
     "linux-blockutils": "git+https://github.com/meilione/node-linux-blockutils.git#commit-ish",
