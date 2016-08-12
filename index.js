@@ -5,7 +5,7 @@
 *
 */
 
-var FileImporter = require('./lib/import').ImportFiles;
+var FileImporter = require('./lib/import-v2').ImportFiles;
 var Tagger       = require('./lib/keyword-generator').keywordgenerator;
 var Organizer    = require('./lib/file-organizer').fileorganizer;
 
@@ -19,6 +19,7 @@ var fs           = require('fs');
 var args = {
     'alias' : {
       'i' : 'import',
+      's' : 'source',
       't' : 'tag',
       'm' : 'move',
       'L' : 'limit',
@@ -47,6 +48,7 @@ if (args.help || noArgumentsSet) {
 	console.log("\tImporting media files");
 	console.log("\t\t-i, --import\tThis will import files from all plugged in USB drives.");
 	console.log("\t\t-L, --limit\tLimit the number of files for import (by filetree).\n\t\t\t\tmainly used for testing purposes.");
+	console.log("\t\t-s, --source\tIf a local file path is specified with source this has precedence\n\t\t\t\tover plugged USB devices.");
 	console.log("");
 	console.log("\tTagging media files");
 	console.log("\t\t-t, --tag\tUse to run the tagger. This will add tags based on \n\t\t\t\tfile paths to the images. Ideally run with the import \n\t\t\t\tbut also possible separate.");
@@ -85,7 +87,13 @@ function importStart() {
 			Importer.limitFileImportTo = limitFilesTo;
 		}
 	}
-	Importer.start();
+
+	if (args.source) {
+		var localfilepath = args.source;
+		Importer.start('',localfilepath);
+	} else {
+		Importer.start();
+	}
 }
 
 function importFinished() {
