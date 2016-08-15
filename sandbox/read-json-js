@@ -1,0 +1,12 @@
+//read big JSON file
+
+var fs           = require('fs');
+
+var file = '/home/yvesmeili/Schreibtisch/out.txt';
+var obj  = JSON.parse(fs.readFileSync(file, 'utf8'));
+
+for (index in obj) {
+	console.log( obj[index].destination );
+};
+
+//console.log(obj);
