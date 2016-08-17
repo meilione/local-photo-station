@@ -33,6 +33,7 @@ args = argv(process.argv.slice(2), args);
 var runImporter  = args.import;
 var runTagger    = args.tag;
 var runOrganizer = args.move;
+var importIsLocal = args.source;
 
 var dbConfig = config.get('global.dbConfig');
 
@@ -80,6 +81,7 @@ function importStart() {
 	console.log("Index.js: Import Started");
 	var settings = config.get('global.filesystem');
 	var Importer = new FileImporter(settings, dbConfig, importFinished);
+	Importer.activateTagger(runTagger);
 	if (args.limit || config.has('debug.importFileLimit')) {
 		var limitFilesTo = args.limit || config.get('debug.importFileLimit');
 		if (limitFilesTo > 0) {
@@ -98,7 +100,7 @@ function importStart() {
 
 function importFinished() {
 	console.log("Index.js: Import finished");
-	if (runTagger) {
+	if (runTagger && !importIsLocal) {
 		taggerStart();
 	}
 }
@@ -112,7 +114,7 @@ function taggerStart() {
 
 function taggerFinished() {
 	console.log("Index.js: Tagger finished");
-	if (runOrganizer) {
+	if (runOrganizer && !importIsLocal) {
 		organizerStart();
 	}
 }

@@ -1,0 +1,120 @@
+[{
+    "filepath": "\/media\/yvesmeili\/5574266F20456D34\/P1080691.JPG",
+    "keywords": [],
+    "destination": "uncategorized\/P1080691.JPG"
+},
+{
+    "filepath": "\/media\/yvesmeili\/5574266F20456D34\/P1080692.JPG",
+    "keywords": [],
+    "destination": "uncategorized\/P1080692.JPG"
+},
+{
+    "filepath": "\/media\/yvesmeili\/5574266F20456D34\/P1080696.JPG",
+    "keywords": [],
+    "destination": "uncategorized\/P1080696.JPG"
+},
+{
+    "filepath": "\/media\/yvesmeili\/5574266F20456D34\/PPLH Bohorok\/School January 2006\/IMG_1206.JPG",
+    "keywords": {
+        "Location": [
+            "PPLH"
+        ],
+        "Month": [
+            "January"
+        ],
+        "Year": [
+            "2006"
+        ]
+    },
+    "destination": "PPLH\/2006\/January\/IMG_1206.JPG"
+},
+{
+    "filepath": "\/media\/yvesmeili\/5574266F20456D34\/PPLH Bohorok\/School January 2006\/IMG_1207.JPG",
+    "keywords": {
+        "Location": [
+            "PPLH"
+        ],
+        "Month": [
+            "January"
+        ],
+        "Year": [
+            "2006"
+        ]
+    },
+    "destination": "PPLH\/2006\/January\/IMG_1207.JPG"
+},
+{
+    "filepath": "\/media\/yvesmeili\/5574266F20456D34\/PPLH Bohorok\/School January 2006\/IMG_1208.JPG",
+    "keywords": {
+        "Location": [
+            "PPLH"
+        ],
+        "Month": [
+            "January"
+        ],
+        "Year": [
+            "2006"
+        ]
+    },
+    "destination": "PPLH\/2006\/January\/IMG_1208.JPG"
+},
+{
+    "filepath": "\/media\/yvesmeili\/5574266F20456D34\/PPLH Bohorok\/School January 2006\/IMG_1209.JPG",
+    "keywords": {
+        "Location": [
+            "PPLH"
+        ],
+        "Month": [
+            "January"
+        ],
+        "Year": [
+            "2006"
+        ]
+    },
+    "destination": "PPLH\/2006\/January\/IMG_1209.JPG"
+},
+{
+    "filepath": "\/media\/yvesmeili\/5574266F20456D34\/PPLH Bohorok\/School January 2006\/IMG_1210.JPG",
+    "keywords": {
+        "Location": [
+            "PPLH"
+        ],
+        "Month": [
+            "January"
+        ],
+        "Year": [
+            "2006"
+        ]
+    },
+    "destination": "PPLH\/2006\/January\/IMG_1210.JPG"
+},
+{
+    "filepath": "\/media\/yvesmeili\/5574266F20456D34\/PPLH Bohorok\/School January 2006\/IMG_1211.JPG",
+    "keywords": {
+        "Location": [
+            "PPLH"
+        ],
+        "Month": [
+            "January"
+        ],
+        "Year": [
+            "2006"
+        ]
+    },
+    "destination": "PPLH\/2006\/January\/IMG_1211.JPG"
+},
+{
+    "filepath": "\/media\/yvesmeili\/5574266F20456D34\/PPLH Bohorok\/School January 2006\/IMG_1212.JPG",
+    "keywords": {
+        "Location": [
+            "PPLH"
+        ],
+        "Month": [
+            "January"
+        ],
+        "Year": [
+            "2006"
+        ]
+    },
+    "destination": "PPLH\/2006\/January\/IMG_1212.JPG"
+}]
