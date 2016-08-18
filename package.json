@@ -9,6 +9,7 @@
   "author": "Yves Meili",
   "license": "ISC",
   "dependencies": {
+    "array-unique": "^0.3.2",
     "async": "^2.0.0-rc.6",
     "config": "^1.21.0",
     "exec-php": "0.0.3",

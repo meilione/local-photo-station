@@ -20,6 +20,7 @@ var args = {
     'alias' : {
       'i' : 'import',
       's' : 'source',
+      'c' : 'conflict',
       't' : 'tag',
       'm' : 'move',
       'L' : 'limit',
@@ -34,6 +35,7 @@ var runImporter  = args.import;
 var runTagger    = args.tag;
 var runOrganizer = args.move;
 var importIsLocal = args.source;
+var conflictHandling = args.conflict;
 
 var dbConfig = config.get('global.dbConfig');
 
@@ -50,6 +52,7 @@ if (args.help || noArgumentsSet) {
 	console.log("\t\t-i, --import\tThis will import files from all plugged in USB drives.");
 	console.log("\t\t-L, --limit\tLimit the number of files for import (by filetree).\n\t\t\t\tmainly used for testing purposes.");
 	console.log("\t\t-s, --source\tIf a local file path is specified with source this has precedence\n\t\t\t\tover plugged USB devices.");
+	console.log("\t\t-c, --conflict\tHow to deal with duplicates during import\n\t\t\t\tignore, overwrite or rename. Ignore is default and takes longer time to process.");
 	console.log("");
 	console.log("\tTagging media files");
 	console.log("\t\t-t, --tag\tUse to run the tagger. This will add tags based on \n\t\t\t\tfile paths to the images. Ideally run with the import \n\t\t\t\tbut also possible separate.");
@@ -82,6 +85,8 @@ function importStart() {
 	var settings = config.get('global.filesystem');
 	var Importer = new FileImporter(settings, dbConfig, importFinished);
 	Importer.activateTagger(runTagger);
+	Importer.setDuplicateMode(args.conflict);
+	
 	if (args.limit || config.has('debug.importFileLimit')) {
 		var limitFilesTo = args.limit || config.get('debug.importFileLimit');
 		if (limitFilesTo > 0) {
@@ -100,9 +105,11 @@ function importStart() {
 
 function importFinished() {
 	console.log("Index.js: Import finished");
-	if (runTagger && !importIsLocal) {
+	finishCLI();
+	//don't run the tagger anymore as this happens automatically on import
+	/*if (runTagger && !importIsLocal) {
 		taggerStart();
-	}
+	}*/
 }
 
 function taggerStart() {
@@ -203,6 +210,15 @@ function askDeleteLogs() {
 }
 
 function deleteLogs() {
+	//TODO get all log files and delete them
+	var logDir = config.get('global.filesystem.filePath.logs.fileList');
+	var logs = fs.readdirSync(logDir);
+
+	logs.forEach(function (file) {
+		fs.unlinkSync(logDir + file);
+		console.log('Deleted: ' + logDir + file);
+	});
+
 	finishCLI();
 }
 
