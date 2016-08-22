@@ -22,20 +22,24 @@ var args = {
       's' : 'source',
       'c' : 'conflict',
       't' : 'tag',
+      'f' : 'fileparts',
       'm' : 'move',
       'L' : 'limit',
       'D' : 'delete',
+      'p' : 'parallelexec',
       'h' : 'help'
     }
 }
 
 args = argv(process.argv.slice(2), args);
 
-var runImporter  = args.import;
-var runTagger    = args.tag;
-var runOrganizer = args.move;
-var importIsLocal = args.source;
+var runImporter      = args.import;
+var runTagger        = args.tag;
+var runOrganizer     = args.move;
+var importIsLocal    = args.source;
 var conflictHandling = args.conflict;
+var fileparts        = args.fileparts;
+var parallelexec     = args.parallelexec;
 
 var dbConfig = config.get('global.dbConfig');
 
@@ -52,14 +56,17 @@ if (args.help || noArgumentsSet) {
 	console.log("\t\t-i, --import\tThis will import files from all plugged in USB drives.");
 	console.log("\t\t-L, --limit\tLimit the number of files for import (by filetree).\n\t\t\t\tmainly used for testing purposes.");
 	console.log("\t\t-s, --source\tIf a local file path is specified with source this has precedence\n\t\t\t\tover plugged USB devices.");
-	console.log("\t\t-c, --conflict\tHow to deal with duplicates during import\n\t\t\t\tignore, overwrite or rename. Ignore is default and takes longer time to process.");
+	console.log("\t\t-c, --conflict\tHow to deal with duplicates during import ignore, overwrite or rename. \n\t\t\t\tIgnore is default and takes longer time to process.");
 	console.log("");
 	console.log("\tTagging media files");
 	console.log("\t\t-t, --tag\tUse to run the tagger. This will add tags based on \n\t\t\t\tfile paths to the images. Ideally run with the import \n\t\t\t\tbut also possible separate.");
+	//console.log("\t\t-f, --fileparts\tIn addition to the generated tags, store each file path part as keyword");
 	console.log("");
 	console.log("\tOrganizing media files");
 	console.log("\t\t-m, --move\tMoves the temporary import and tagged files to a \n\t\t\t\tusable and accessible folder structure.");
 	console.log("");
+	console.log("\tOPTIONS");
+	console.log("\t\t-p, --parallelexec\tSets the maximum amount of parallel executions. Default 1000");
 	console.log("");
 }
 
@@ -85,8 +92,9 @@ function importStart() {
 	var settings = config.get('global.filesystem');
 	var Importer = new FileImporter(settings, dbConfig, importFinished);
 	Importer.activateTagger(runTagger);
+	Importer.setTaggerSettings(fileparts);
 	Importer.setDuplicateMode(args.conflict);
-	
+	Importer.setMaxParallelExecutions(args.parallelexec);
 	if (args.limit || config.has('debug.importFileLimit')) {
 		var limitFilesTo = args.limit || config.get('debug.importFileLimit');
 		if (limitFilesTo > 0) {
