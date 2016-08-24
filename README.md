@@ -4,8 +4,8 @@ TODO
 - store original file name (parts) in metadata as an option
 - add sound as OK and ERR signals as when runnign script on the server
 - move everything to live environment
-- when importing from USB, set ignore path in tagger to the base path of the stick
 
+OK - when importing from USB, set ignore path in tagger to the base path of the stick
 OK- limit max amount of data processed at any time (process in batch if more than > 1000)
 OK- improve structuring where the file is put
 OK	- group files that have only dates
