@@ -1,0 +1,3 @@
+[submodule "php-filesorter"]
+	path = php-filesorter
+	url = https://github.com/meilione/php-filesorter.git
