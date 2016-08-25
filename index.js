@@ -89,7 +89,7 @@ if (runOrganizer && !runImporter && !runTagger) {
 
 function importStart() {
 	console.log("Index.js: Import Started");
-	var settings = config.get('global.filesystem');
+	var settings = {'global' : config.get('global'), 'local' : config.get('module.importer') };
 	var Importer = new FileImporter(settings, dbConfig, importFinished);
 	Importer.activateTagger(runTagger);
 	Importer.setTaggerSettings(fileparts);
