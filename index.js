@@ -7,7 +7,7 @@
 
 var FileImporter = require('./lib/import-v2').ImportFiles;
 var Tagger       = require('./lib/keyword-generator').keywordgenerator;
-var Organizer    = require('./lib/file-organizer').fileorganizer;
+//var Organizer    = require('./lib/file-organizer').fileorganizer;
 
 var EventEmitter = require('events').EventEmitter;
 var argv         = require('minimist');

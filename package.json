@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/meilione/local-photo-station.git"
+  },
   "author": "Yves Meili",
   "license": "ISC",
   "dependencies": {
@@ -14,17 +18,13 @@
     "config": "^1.21.0",
     "exec-php": "0.0.3",
     "js-md5": "^0.4.1",
-    "linux-blockutils": "git+https://github.com/meilione/node-linux-blockutils.git#commit-ish",
+    "linux-blockutils": "git+https://github.com/meilione/node-linux-blockutils.git",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "moment": "^2.13.0",
-    "node-usb-detection": "^1.0.2",
-    "organize.js": "git+https://github.com/meilione/organize.js.git",
-    "photo-organize": "git+https://github.com/meilione/photo-organize.git",
     "progress": "^1.1.8",
-    "shelljs": "^0.7.0",
     "sqlite3": "^3.1.4",
-    "winston": "^2.2.0",
-    "yesno": "0.0.1"
+    "yesno": "0.0.1",
+    "exif": "0.5.1"
   }
 }
