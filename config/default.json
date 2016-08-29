@@ -5,16 +5,16 @@
 			"yelobjects": "./php-filesorter/db/yel-objects.db"
 		},
 		"filesystem": {
-			"baseDirectory": "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/",
+			"baseDirectory": "/srv/samba/digitalassetmanagement/",
 			"filePath" : {
 				"media" : {
 					"src"  : "",
-					"dest" : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.imported-waiting/",
-					"final" : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/imported/"
+					"dest" : "/srv/samba/digitalassetmanagement/.imported-waiting/",
+					"final" : "/srv/samba/digitalassetmanagement/imported/"
 				},
 				"logs" : {
-					"fileList" : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.import-logs/",
-					"errors"   : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.import-logs/importerrors.log"
+					"fileList" : "/srv/samba/digitalassetmanagement/.import-logs/",
+					"errors"   : "/srv/samba/digitalassetmanagement/.import-logs/importerrors.log"
 				}
 			}
 		}
@@ -22,7 +22,7 @@
 	"module": {
 		"importer": {
 			"importFilter" : {
-				"ignoreDevices" : ["sda","loop0"],
+				"ignoreDevices" : ["sda","sdb","sr0","sme0002--*"],
 				"minPathLength" : 5
 			}
 		},

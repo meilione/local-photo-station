@@ -7,7 +7,7 @@
 
 var FileImporter = require('./lib/import-v2').ImportFiles;
 var Tagger       = require('./lib/keyword-generator').keywordgenerator;
-var Organizer    = require('./lib/file-organizer').fileorganizer;
+//var Organizer    = require('./lib/file-organizer').fileorganizer;
 
 var EventEmitter = require('events').EventEmitter;
 var argv         = require('minimist');
@@ -89,7 +89,7 @@ if (runOrganizer && !runImporter && !runTagger) {
 
 function importStart() {
 	console.log("Index.js: Import Started");
-	var settings = config.get('global.filesystem');
+	var settings = {'global' : config.get('global'), 'local' : config.get('module.importer') };
 	var Importer = new FileImporter(settings, dbConfig, importFinished);
 	Importer.activateTagger(runTagger);
 	Importer.setTaggerSettings(fileparts);
