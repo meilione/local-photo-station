@@ -1,0 +1,40 @@
+{
+	"global": {
+		"dbConfig": {
+			"file": "./data/photo-station.db"
+		},
+		"filesystem": {
+			"baseDirectory": "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/",
+			"filePath" : {
+				"media" : {
+					"src"  : "",
+					"dest" : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.imported-waiting/",
+					"final" : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/imported/"
+				},
+				"logs" : {
+					"fileList" : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.import-logs/",
+					"errors"   : "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/.import-logs/importerrors.log"
+				}
+			}
+		}
+	},
+	"module": {
+		"importer": {
+			"importFilter" : {
+				"ignoreDevices" : ["sda","loop0"],
+				"minPathLength" : 5
+			}
+		},
+		"tagger": {
+
+		},
+		"organizer": {
+
+		}
+	},
+	"daemon": {
+
+	},
+	"debug": {
+	}
+}
