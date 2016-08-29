@@ -1,5 +1,7 @@
 TODO
 
+- use supervisor program https://www.toptal.com/nodejs/top-10-common-nodejs-developer-mistakes
+- mount USB drives if they are not mounted (happens mostly on servers)
 - mount win share on linux -> install NTFS on windows server
 - store original file name (parts) in metadata as an option
 - add sound as OK and ERR signals as when runnign script on the server
