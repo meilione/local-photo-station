@@ -1,15 +1,15 @@
 TODO
 
 - use supervisor program https://www.toptal.com/nodejs/top-10-common-nodejs-developer-mistakes
-- mount USB drives if they are not mounted (happens mostly on servers)
 - mount win share on linux -> install NTFS on windows server
 - store original file name (parts) in metadata as an option
 - add sound as OK and ERR signals as when runnign script on the server
-- move everything to live environment
 
+OK - mount USB drives if they are not mounted (happens mostly on servers)
+OK - move everything to live environment
 OK - when importing from USB, set ignore path in tagger to the base path of the stick
-OK- limit max amount of data processed at any time (process in batch if more than > 1000)
-OK- improve structuring where the file is put
+OK - limit max amount of data processed at any time (process in batch if more than > 1000)
+OK - improve structuring where the file is put
 OK	- group files that have only dates
 OK	- group files that only have orangutan names
 OK - keywords adding to file in a more structured way author to author location as location etc

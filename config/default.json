@@ -3,26 +3,12 @@
 		"dbConfig": {
 			"file": "./data/photo-station.db",
 			"yelobjects": "./php-filesorter/db/yel-objects.db"
-		},
-		"filesystem": {
-			"baseDirectory": "/srv/samba/digitalassetmanagement/",
-			"filePath" : {
-				"media" : {
-					"src"  : "",
-					"dest" : "/srv/samba/digitalassetmanagement/.imported-waiting/",
-					"final" : "/srv/samba/digitalassetmanagement/imported/"
-				},
-				"logs" : {
-					"fileList" : "/srv/samba/digitalassetmanagement/.import-logs/",
-					"errors"   : "/srv/samba/digitalassetmanagement/.import-logs/importerrors.log"
-				}
-			}
 		}
 	},
 	"module": {
 		"importer": {
 			"importFilter" : {
-				"ignoreDevices" : ["sda","sdb","sr0","sme0002--*"],
+				"ignoreDevices" : ["sda"],
 				"minPathLength" : 5
 			}
 		},

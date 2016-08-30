@@ -1,8 +1,5 @@
 {
 	"global": {
-		"dbConfig": {
-			"file": "./data/photo-station.db"
-		},
 		"filesystem": {
 			"baseDirectory": "/home/yvesmeili/Sites/zivi/local-photo-station/digital-asset-management/",
 			"filePath" : {
@@ -24,17 +21,6 @@
 				"ignoreDevices" : ["sda","loop0"],
 				"minPathLength" : 5
 			}
-		},
-		"tagger": {
-
-		},
-		"organizer": {
-
 		}
-	},
-	"daemon": {
-
-	},
-	"debug": {
 	}
 }

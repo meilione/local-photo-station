@@ -1,9 +1,5 @@
 {
 	"global": {
-		"dbConfig": {
-			"file": "./data/photo-station.db",
-			"yelobjects": "./php-filesorter/db/yel-objects.db"
-		},
 		"filesystem": {
 			"baseDirectory": "/srv/samba/digitalassetmanagement/",
 			"filePath" : {
@@ -25,15 +21,6 @@
 				"ignoreDevices" : ["sda","sdb","sr0","sme0002--*"],
 				"minPathLength" : 5
 			}
-		},
-		"tagger": {
-
-		},
-		"organizer": {
-
 		}
-	},
-	"daemon": {
-		"watchInterval" : 2000
 	}
 }
