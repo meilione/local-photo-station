@@ -20,23 +20,24 @@
 */
 
 var FileImporter = require('./lib/import').ImportFiles;
-var Tagger       = require('./lib/keyword-generator').keywordgenerator;
-//var Organizer    = require('./lib/file-organizer').fileorganizer;
 var blockutils   = require('linux-blockutils');
 var fs           = require('fs');
 var moment       = require('moment');
 var md5          = require('js-md5');
 var config       = require('config');
+var Audioplayer = require('./lib/audio-player.js').AudioPlayer;
 
 
 //Watch USB Port
-var logFilePath = '/home/yvesmeili/Sites/zivi/local-photo-station/daemon.log';
+var logFilePath = config.get('global.filesystem.filePath.logs.fileList') + 'daemon.log';
 var importIsRunning = false;
 var baseLineUSBDevicesPlugged;
+var resetToUSBBaseLine;
 var knownUSBDevices = [];
 var runningIntervalId;
 var dbConfig = config.get('global.dbConfig');
 
+var Audio = new Audioplayer();
 
 /*
 * Start Process
@@ -63,12 +64,15 @@ function watch() {
 	//console.log("Usb Devices:\n", usbmonitor.list());
 	getDevices(function (devices) {
 		//console.log( devices );
+		console.log(' . ');
 		var usbPlugChanged = md5(devices.toString()) != baseLineUSBDevicesPlugged;
 		if (usbPlugChanged && !importIsRunning) {
+			//resetToUSBBaseLine = baseLineUSBDevicesPlugged;
 			baseLineUSBDevicesPlugged = md5(devices.toString());
 
 			importIsRunning = true;
 			console.log('USB Changed');
+			Audio.play('gling');
 
 			devices.forEach(function (device) {
 				knownUSBDevices.push(md5(device.toString()));
@@ -77,11 +81,10 @@ function watch() {
 			console.log( knownUSBDevices );
 
 			//Run import
-			//TODO how to prevent duplicate import? lock usb mount name for 1h?
-			//TODO maybe start this as a separate process
-			var settings = config.get('global.filesystem');
+			var settings = {'global' : config.get('global'), 'local' : config.get('module.importer') };
 			var Importer = new FileImporter(settings, dbConfig, importFinished);
-
+			Importer.activateTagger(true);
+			Importer.playSounds = true;
 			if (config.has('debug.importFileLimit')) {
 				var limitFilesTo = config.get('debug.importFileLimit');
 				if (limitFilesTo > 0) {
@@ -98,33 +101,15 @@ function watch() {
 
 
 function importFinished() {
-	console.log('Running the Tagger now');
-	//Start Tagging
-	var settings = Object.assign( config.get('global.filesystem'), config.get('module.tagger') );
-	var tagger = new Tagger(settings, dbConfig, taggingFinished);
-	tagger.start();
-
-}
-
-
-function taggingFinished() {
-	//move files to date folders
-	console.log('Moving the files to folders');
-	var settings = Object.assign( config.get('global.filesystem'), config.get('module.organizer') );
-	var organizer = new Organizer(settings, organizerFinished);
-	organizer.start();
-
+	console.log('Import finished');
 	importIsRunning = false;
-}
-
-
-function organizerFinished() {
-	console.log('Organizer finished');
+	//baseLineUSBDevicesPlugged = resetToUSBBaseLine;
+	Audio.success();
 }
 
 
 function getDevices(callback) {
-	var ignoredDevices = ['sda','loop0'].join('|');
+	var ignoredDevices = config.get('module.importer.importFilter.ignoreDevices').join('|');
 	blockutils.getBlockInfo({"ignoredev":"^("+ ignoredDevices +")"}, function (err,json){
 		if (err) {
 			return false;

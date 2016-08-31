@@ -1,9 +1,11 @@
 TODO
 
+- daemon, discover when usb is plugged (same again)
 - use supervisor program https://www.toptal.com/nodejs/top-10-common-nodejs-developer-mistakes
 - mount win share on linux -> install NTFS on windows server
-- add sound as OK and ERR signals as when runnign script on the server
+- add keyword Orangutan if it is an orangutan name (phpfilesorter?)
 
+OK - add sound as OK and ERR signals as when runnign script on the server
 NOPE- store original file name (parts) in metadata as an option
 OK - mount USB drives if they are not mounted (happens mostly on servers)
 OK - move everything to live environment

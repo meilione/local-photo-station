@@ -22,5 +22,8 @@
 				"minPathLength" : 5
 			}
 		}
+	},
+	"daemon": {
+		"watchInterval" : 10000
 	}
 }
