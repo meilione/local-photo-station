@@ -1,6 +1,9 @@
 TODO
 
+Daemon
 - daemon, discover when usb is plugged (same again)
+- if import is running for more than 1 hour maybe reset?
+
 - use supervisor program https://www.toptal.com/nodejs/top-10-common-nodejs-developer-mistakes
 - mount win share on linux -> install NTFS on windows server
 - add keyword Orangutan if it is an orangutan name (phpfilesorter?)

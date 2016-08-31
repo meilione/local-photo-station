@@ -60,8 +60,8 @@ function run() {
 	runningIntervalId = setInterval(watch, watchInterval);
 }
 
+
 function watch() {
-	//console.log("Usb Devices:\n", usbmonitor.list());
 	getDevices(function (devices) {
 		//console.log( devices );
 		console.log(' . ');
@@ -101,7 +101,7 @@ function watch() {
 
 
 function importFinished() {
-	console.log('Import finished');
+	console.log('Import Daemon finished');
 	importIsRunning = false;
 	//baseLineUSBDevicesPlugged = resetToUSBBaseLine;
 	Audio.success();
