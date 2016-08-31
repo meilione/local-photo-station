@@ -21,7 +21,7 @@
 
 var FileImporter = require('./lib/import').ImportFiles;
 var Tagger       = require('./lib/keyword-generator').keywordgenerator;
-var Organizer    = require('./lib/file-organizer').fileorganizer;
+//var Organizer    = require('./lib/file-organizer').fileorganizer;
 var blockutils   = require('linux-blockutils');
 var fs           = require('fs');
 var moment       = require('moment');

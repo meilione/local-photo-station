@@ -62,8 +62,8 @@ if (args.help || noArgumentsSet) {
 	console.log("\t\t-t, --tag\tUse to run the tagger. This will add tags based on \n\t\t\t\tfile paths to the images. Ideally run with the import \n\t\t\t\tbut also possible separate.");
 	//console.log("\t\t-f, --fileparts\tIn addition to the generated tags, store each file path part as keyword");
 	console.log("");
-	console.log("\tOrganizing media files");
-	console.log("\t\t-m, --move\tMoves the temporary import and tagged files to a \n\t\t\t\tusable and accessible folder structure.");
+	//console.log("\tOrganizing media files");
+	//console.log("\t\t-m, --move\tMoves the temporary import and tagged files to a \n\t\t\t\tusable and accessible folder structure.");
 	console.log("");
 	console.log("\tOPTIONS");
 	console.log("\t\t-p, --parallelexec\tSets the maximum amount of parallel executions. Default 1000");

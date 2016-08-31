@@ -2,9 +2,9 @@ TODO
 
 - use supervisor program https://www.toptal.com/nodejs/top-10-common-nodejs-developer-mistakes
 - mount win share on linux -> install NTFS on windows server
-- store original file name (parts) in metadata as an option
 - add sound as OK and ERR signals as when runnign script on the server
 
+NOPE- store original file name (parts) in metadata as an option
 OK - mount USB drives if they are not mounted (happens mostly on servers)
 OK - move everything to live environment
 OK - when importing from USB, set ignore path in tagger to the base path of the stick
