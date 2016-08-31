@@ -16,6 +16,7 @@
 *  pm2 info <id>
 *
 * See documentation at: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-centos-7
+* http://pm2.keymetrics.io/
 */
 
 var FileImporter = require('./lib/import').ImportFiles;
