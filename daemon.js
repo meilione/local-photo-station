@@ -26,7 +26,19 @@ var moment       = require('moment');
 var md5          = require('js-md5');
 var config       = require('config');
 var Audioplayer = require('./lib/audio-player.js').AudioPlayer;
+var argv         = require('minimist');
 
+//ARGS
+var args = {
+    'alias' : {
+      'c' : 'conflict',
+      'p' : 'parallelexec'
+    }
+}
+
+args = argv(process.argv.slice(2), args);
+var conflictHandling = args.conflict;
+var parallelexec     = args.parallelexec;
 
 //Watch USB Port
 var logFilePath = config.get('global.filesystem.filePath.logs.fileList') + 'daemon.log';
@@ -86,6 +98,8 @@ function watch() {
 			var settings = {'global' : config.get('global'), 'local' : config.get('module.importer') };
 			Importer = new FileImporter(settings, dbConfig, importFinished);
 			Importer.activateTagger(true);
+			Importer.setDuplicateMode(args.conflict);
+			Importer.setMaxParallelExecutions(args.parallelexec);
 			Importer.playSounds = true;
 			if (config.has('debug.importFileLimit')) {
 				var limitFilesTo = config.get('debug.importFileLimit');

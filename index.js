@@ -64,6 +64,10 @@ if (args.help || noArgumentsSet) {
 	console.log("\tOPTIONS");
 	console.log("\t\t-p, --parallelexec\tSets the maximum amount of parallel executions. Default 1000");
 	console.log("");
+	console.log("");
+	console.log("\tCLEAN UP");
+	console.log("\t\t-D, --delete\tDelete log files and reset import data (two prompts)");
+	console.log("");
 }
 
 
