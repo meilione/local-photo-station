@@ -33,11 +33,13 @@ var logFilePath = config.get('global.filesystem.filePath.logs.fileList') + 'daem
 var importIsRunning = false;
 var baseLineUSBDevicesPlugged;
 var resetToUSBBaseLine;
-var knownUSBDevices = [];
 var runningIntervalId;
 var dbConfig = config.get('global.dbConfig');
 
 var Audio = new Audioplayer();
+Audio.useVoices(true);
+
+var Importer;
 
 /*
 * Start Process
@@ -46,6 +48,7 @@ var Audio = new Audioplayer();
 getDevices(function (devices) {
 	console.log( "Initial devices: " + devices.toString() );
 	baseLineUSBDevicesPlugged = md5(devices.toString());
+	resetToUSBBaseLine = baseLineUSBDevicesPlugged;
 	console.log('baseline: ' + baseLineUSBDevicesPlugged);
 	run();
 });
@@ -63,8 +66,13 @@ function run() {
 
 function watch() {
 	getDevices(function (devices) {
-		//console.log( devices );
-		console.log(' . ');
+		if (devices.length === 0) {
+			if (baseLineUSBDevicesPlugged !== resetToUSBBaseLine) {
+				baseLineUSBDevicesPlugged = resetToUSBBaseLine;
+			}
+			return;
+		}
+
 		var usbPlugChanged = md5(devices.toString()) != baseLineUSBDevicesPlugged;
 		if (usbPlugChanged && !importIsRunning) {
 			//resetToUSBBaseLine = baseLineUSBDevicesPlugged;
@@ -74,15 +82,9 @@ function watch() {
 			console.log('USB Changed');
 			Audio.play('gling');
 
-			devices.forEach(function (device) {
-				knownUSBDevices.push(md5(device.toString()));
-			});
-			
-			console.log( knownUSBDevices );
-
 			//Run import
 			var settings = {'global' : config.get('global'), 'local' : config.get('module.importer') };
-			var Importer = new FileImporter(settings, dbConfig, importFinished);
+			Importer = new FileImporter(settings, dbConfig, importFinished);
 			Importer.activateTagger(true);
 			Importer.playSounds = true;
 			if (config.has('debug.importFileLimit')) {
@@ -100,11 +102,9 @@ function watch() {
 }
 
 
-function importFinished() {
+function importFinished(device) {
 	console.log('Import Daemon finished');
 	importIsRunning = false;
-	//baseLineUSBDevicesPlugged = resetToUSBBaseLine;
-	Audio.success();
 }
 
 

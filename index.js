@@ -103,7 +103,7 @@ function importStart() {
 	}
 }
 
-function importFinished() {
+function importFinished(device) {
 	console.log("Index.js: Import finished");
 	finishCLI();
 }
