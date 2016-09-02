@@ -1,13 +1,18 @@
 TODO
 
-Daemon
-- daemon, discover when usb is plugged (same again)
+
+- destination flag, all files will be imported (structured) to basepath + destination + derived path
+- daemon, option to set import only to to usb stick pending folder, notify admin about pending import
+
+- populate xnview thumbs and keywords after import
 - if import is running for more than 1 hour maybe reset?
 
 - use supervisor program https://www.toptal.com/nodejs/top-10-common-nodejs-developer-mistakes
 - mount win share on linux -> install NTFS on windows server
 - add keyword Orangutan if it is an orangutan name (phpfilesorter?)
+- Very small web interfsce add user send notify when done
 
+OK - daemon, discover when usb is plugged (same again)
 OK - add sound as OK and ERR signals as when runnign script on the server
 NOPE- store original file name (parts) in metadata as an option
 OK - mount USB drives if they are not mounted (happens mostly on servers)
