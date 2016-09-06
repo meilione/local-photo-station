@@ -1,6 +1,6 @@
 /*
 * Name:   Photostation daemon
-* Date:   2016-06-01
+* Date:   2016-09-01
 * Author: Yves Meili <meili@kitakit.ch>
 *
 * The daemon will discover any newly plugged USB thumb drive and auto-

@@ -1,5 +1,9 @@
-
 /*
+* Name:   Photostation
+* Date:   2016-09-01
+* Author: Yves Meili <meili@kitakit.ch>
+*
+* Import photos from USB or file system into a set folder structure. Also exif-tags images.
 *
 * export NODE_ENV=production
 *
@@ -19,9 +23,10 @@ var args = {
     'alias' : {
       'i' : 'import',
       's' : 'source',
+      'o' : 'output',
+      'f' : 'flat',
       'c' : 'conflict',
       't' : 'tag',
-      'f' : 'fileparts',
       'm' : 'move',
       'L' : 'limit',
       'D' : 'delete',
@@ -35,6 +40,8 @@ args = argv(process.argv.slice(2), args);
 var runImporter      = args.import;
 var runTagger        = args.tag;
 var importIsLocal    = args.source;
+var destPathSegment  = args.output;
+var flatStructure    = args.flat;
 var conflictHandling = args.conflict;
 var fileparts        = args.fileparts;
 var parallelexec     = args.parallelexec;
@@ -53,12 +60,15 @@ if (args.help || noArgumentsSet) {
 	console.log("\tImporting media files");
 	console.log("\t\t-i, --import\tThis will import files from all plugged in USB drives.");
 	console.log("\t\t-L, --limit\tLimit the number of files for import (by filetree).\n\t\t\t\tmainly used for testing purposes.");
+	console.log("");
 	console.log("\t\t-s, --source\tIf a local file path is specified with source this has precedence\n\t\t\t\tover plugged USB devices.");
+	console.log("\t\t-o, --output\tSet the output folder relative to the configured base path\n\t\t\t\tExample: /basepath/<output path segment>/imagename.jpg\n\t\t\t\tUsage: -output='outputpath/'");
+	console.log("\t\t-f, --flat\tOnly imports the file to the given directory without moving it\n\t\t\t\tto subfolders. Used in conjuction with --output.");
+	console.log("");
 	console.log("\t\t-c, --conflict\tHow to deal with duplicates during import ignore, overwrite or rename. \n\t\t\t\tIgnore is default and takes longer time to process.");
 	console.log("");
 	console.log("\tTagging media files");
 	console.log("\t\t-t, --tag\tUse to run the tagger. This will add tags based on \n\t\t\t\tfile paths to the images. Has to run with the importer.");
-	//console.log("\t\t-f, --fileparts\tIn addition to the generated tags, store each file path part as keyword");
 	console.log("");
 	console.log("");
 	console.log("\tOPTIONS");
@@ -66,7 +76,7 @@ if (args.help || noArgumentsSet) {
 	console.log("");
 	console.log("");
 	console.log("\tCLEAN UP");
-	console.log("\t\t-D, --delete\tDelete log files and reset import data (two prompts)");
+	console.log("\t\t-D, --delete\tDelete log files and reset import db data (two prompts, all images are kept)");
 	console.log("");
 }
 
@@ -91,6 +101,14 @@ function importStart() {
 	Importer.setTaggerSettings(fileparts);
 	Importer.setDuplicateMode(args.conflict);
 	Importer.setMaxParallelExecutions(args.parallelexec);
+
+	if (destPathSegment) {
+		Importer.destPathSegment = destPathSegment;
+	}
+	if (flatStructure) {
+		Importer.flatStructure = true;
+	}
+	
 	if (args.limit || config.has('debug.importFileLimit')) {
 		var limitFilesTo = args.limit || config.get('debug.importFileLimit');
 		if (limitFilesTo > 0) {

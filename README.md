@@ -1,7 +1,6 @@
 TODO
 
 
-- destination flag, all files will be imported (structured) to basepath + destination + derived path
 - daemon, option to set import only to to usb stick pending folder, notify admin about pending import
 
 - populate xnview thumbs and keywords after import
@@ -12,6 +11,7 @@ TODO
 - add keyword Orangutan if it is an orangutan name (phpfilesorter?)
 - Very small web interfsce add user send notify when done
 
+OK- destination flag, all files will be imported (structured) to basepath + destination + derived path
 OK - daemon, discover when usb is plugged (same again)
 OK - add sound as OK and ERR signals as when runnign script on the server
 NOPE- store original file name (parts) in metadata as an option
